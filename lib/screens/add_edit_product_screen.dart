@@ -76,6 +76,8 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
     }
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     final isEditing = widget.product != null;

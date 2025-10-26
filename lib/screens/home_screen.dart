@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // 🔍 Search Bar
+          // Search bar widget to list
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          // 🧾 Product List or Empty State
+          // Product List or Empty State
           Expanded(
             child: products.isEmpty
                 ? _buildEmptyState()
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-      // ➕ Floating Button
+      // Floating Button to add stuff
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.blueAccent,
         icon: const Icon(Icons.add),
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // 🧩 Card Widget
+  // Card Widget
   Widget _buildProductCard(BuildContext context, Product product) {
     return Card(
       elevation: 4,
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // 🗑 Delete Confirmation
+  // Delete stuff
   void _confirmDelete(BuildContext context, int id) {
     showDialog(
       context: context,
@@ -169,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // 🪣 Empty State Widget
+  // Empty State
   Widget _buildEmptyState() {
     return Center(
       child: Column(
