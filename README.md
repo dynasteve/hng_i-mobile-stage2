@@ -22,9 +22,10 @@ git clone https://github.com/<your-username>/hng_stage3_app.git
 cd hng_stage3_app
 flutter pub get
 flutter run
-Build Release APK
-bash
-Copy code
+```
+
+## Build Release APK
+```bash
 flutter clean
 flutter pub get
 flutter build apk --release
