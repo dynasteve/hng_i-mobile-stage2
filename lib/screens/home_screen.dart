@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ElevatedButton.icon(
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close),
-                  label: const Text('Close Panel'),
+                  label: const Text('Close'),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 48),
                   ),
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: products.isEmpty
                   ? const Center(
                       child: Text(
-                        'No products found.',
+                        'No products found.\nAdd new product with the button below',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
@@ -257,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _openAddProduct(context),
         icon: const Icon(Icons.add),
-        label: const Text('Add Product'),
+        label: const Text('Add New Product'),
       ),
     );
   }

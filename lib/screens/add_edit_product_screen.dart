@@ -84,7 +84,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditing ? 'Edit Product' : 'Add Product'),
+        title: Text(isEditing ? 'Update Item' : 'New Item'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -122,11 +122,11 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
-                  labelText: 'Product Name',
+                  labelText: 'Name',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter product name' : null,
+                    value == null || value.isEmpty ? 'Enter Item name' : null,
               ),
               const SizedBox(height: 12),
 
@@ -174,7 +174,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                 ),
                 onPressed: _saveProduct,
                 icon: const Icon(Icons.save),
-                label: Text(isEditing ? 'Update Product' : 'Save Product'),
+                label: Text(isEditing ? 'Update' : 'Save'),
               ),
             ],
           ),

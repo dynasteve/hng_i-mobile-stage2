@@ -28,7 +28,7 @@ class Product {
     return map;
   }
 
-  // Create Product from Map
+  // Create Products from Map
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['id'],
