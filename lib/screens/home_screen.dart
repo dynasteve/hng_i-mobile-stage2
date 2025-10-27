@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/product_provider.dart';
 import '../providers/theme_provider.dart';
+import '../providers/auth_provider.dart';
 import 'add_edit_product_screen.dart';
 import '../models/product.dart';
-import '../providers/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -78,34 +78,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.blueAccent,
                 ),
                 child: Center(
-                  child: Text(
-                    'Storekeeper App',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: Image.asset("assets/supermarket_logo.png"),
                 ),
               ),
               ListTile(
                 leading: const Icon(Icons.home),
                 title: const Text('Home'),
-                onTap: () {
-                  Navigator.pop(context); // Close drawer
-                },
+                onTap: () => Navigator.pop(context),
+              ),
+              const Divider(),
+              ListTile(
+                leading: const Icon(Icons.dark_mode),
+                title: const Text('Dark Mode'),
+                trailing: Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, _) {
+                    return Switch(
+                      value: themeProvider.isDarkMode,
+                      onChanged: (val) => themeProvider.toggleTheme(),
+                    );
+                  },
+                ),
               ),
               const Divider(),
               ListTile(
                 leading: const Icon(Icons.logout),
                 title: const Text('Logout'),
                 onTap: () {
-                  // Logout via AuthProvider
                   final authProvider =
                       Provider.of<AuthProvider>(context, listen: false);
                   authProvider.logout();
-
-                  // Navigate to LoginScreen and remove all previous routes
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/login', (route) => false);
                 },
@@ -162,9 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                     onChanged: (value) {
-                      if (value != null) {
-                        setState(() => _sortOption = value);
-                      }
+                      if (value != null) setState(() => _sortOption = value);
                     },
                   ),
                 ],
@@ -175,10 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? const Center(
                       child: Text(
                         'No products found.\nAdd new product with the button below',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                        ),
+                        style: TextStyle(fontSize: 18, color: Colors.black54),
+                        textAlign: TextAlign.center,
                       ),
                     )
                   : ListView.builder(
@@ -190,8 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                              borderRadius: BorderRadius.circular(16)),
                           elevation: 3,
                           child: ListTile(
                             contentPadding: const EdgeInsets.all(10),
@@ -218,18 +214,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: Text(
                               product.name,
                               style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
+                                  fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                             subtitle: Padding(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
                                 'Qty: ${product.quantity}  •  ₦${product.price}',
                                 style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
+                                    fontSize: 14, color: Colors.black54),
                               ),
                             ),
                             trailing: PopupMenuButton<String>(

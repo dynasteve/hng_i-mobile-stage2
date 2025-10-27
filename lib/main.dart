@@ -26,7 +26,7 @@ class StorekeeperApp extends StatelessWidget {
         builder: (context, themeProvider, _) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Storekeeper App',
+            title: 'HNG stage 3 App',
             themeMode: themeProvider.themeMode,
             theme: ThemeData(
               useMaterial3: true,
