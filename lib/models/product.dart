@@ -1,7 +1,7 @@
 class Product {
   int? id;
   String name;
-  String? description; // ✅ added this
+  String? description;
   int quantity;
   double price;
   String? imagePath;
@@ -19,7 +19,7 @@ class Product {
   Map<String, dynamic> toMap() {
     final map = <String, dynamic>{
       'name': name,
-      'description': description, // ✅ added
+      'description': description,
       'quantity': quantity,
       'price': price,
       'imagePath': imagePath,
@@ -28,12 +28,12 @@ class Product {
     return map;
   }
 
-  // Create Product from Map (retrieved from database)
+  // Create Product from Map
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['id'],
       name: map['name'],
-      description: map['description'], // ✅ added
+      description: map['description'],
       quantity: map['quantity'],
       price: map['price'],
       imagePath: map['imagePath'],
