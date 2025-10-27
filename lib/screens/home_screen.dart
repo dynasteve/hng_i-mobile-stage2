@@ -5,6 +5,7 @@ import '../providers/product_provider.dart';
 import '../providers/theme_provider.dart';
 import 'add_edit_product_screen.dart';
 import '../models/product.dart';
+import '../providers/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,9 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     List<Product> products = productProvider.products
-        .where((p) => p.name
-            .toLowerCase()
-            .contains(_searchQuery.toLowerCase().trim()))
+        .where((p) =>
+            p.name.toLowerCase().contains(_searchQuery.toLowerCase().trim()))
         .toList();
 
     products = _getSortedProducts(products);
@@ -71,37 +71,44 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Image.asset(
-                    'assets/supermarket_logo.png',
-                    height: 100,
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                ),
+                child: Center(
+                  child: Text(
+                    'Storekeeper App',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.home),
+                title: const Text('Home'),
+                onTap: () {
+                  Navigator.pop(context); // Close drawer
+                },
               ),
               const Divider(),
               ListTile(
-                leading: const Icon(Icons.dark_mode),
-                title: const Text('Dark Mode'),
-                trailing: Switch(
-                  value: themeProvider.isDarkMode,
-                  onChanged: (_) => themeProvider.toggleTheme(),
-                ),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton.icon(
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.close),
-                  label: const Text('Close'),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 48),
-                  ),
-                ),
+                leading: const Icon(Icons.logout),
+                title: const Text('Logout'),
+                onTap: () {
+                  // Logout via AuthProvider
+                  final authProvider =
+                      Provider.of<AuthProvider>(context, listen: false);
+                  authProvider.logout();
+
+                  // Navigate to LoginScreen and remove all previous routes
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/login', (route) => false);
+                },
               ),
             ],
           ),
@@ -111,8 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
                 children: [
                   Expanded(

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/theme_provider.dart';
+import 'providers/auth_provider.dart';
 import 'screens/home_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/signup_screen.dart';
 
 void main() {
   runApp(const StorekeeperApp());
@@ -17,6 +20,7 @@ class StorekeeperApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
@@ -43,7 +47,12 @@ class StorekeeperApp extends StatelessWidget {
               colorSchemeSeed: Colors.blueAccent,
               brightness: Brightness.dark,
             ),
-            home: const HomeScreen(),
+            initialRoute: '/login',
+            routes: {
+              '/login': (_) => const LoginScreen(),
+              '/signup': (_) => const SignupScreen(),
+              '/home': (_) => const HomeScreen(),
+            },
           );
         },
       ),
@@ -51,7 +60,7 @@ class StorekeeperApp extends StatelessWidget {
   }
 }
 
-/// Use this helper whenever you want a consistently styled card:
+/// Helper for consistent card style
 Card buildStyledCard({required Widget child, EdgeInsetsGeometry? margin}) {
   return Card(
     margin: margin ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
