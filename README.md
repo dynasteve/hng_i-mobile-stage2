@@ -1,4 +1,4 @@
-# hng_stage3_app — Storekeeper App (HNG Stage 2)
+# hng_stage2_app — Storekeeper App (HNG Stage 2)
 
 A Flutter store inventory app that uses SQLite for local relational storage and supports full CRUD operations and native camera/gallery image input.
 
@@ -30,7 +30,7 @@ flutter pub get
 flutter build apk --release
 ```
 
-## release APK will be at:
+## Release APK will be at:
 build/app/outputs/flutter-apk/app-release.apk
 
 ## Links
